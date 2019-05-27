@@ -9,12 +9,20 @@ var login = function() {
 		reload();
 	}
 	
+	if (document.body.innerHTML.indexOf('Connection to server has been closed') != -1){
+		refresh();
+	}
+	
 	setTimeout(login, timeout);
+}
+
+var refresh = function() {
+	Array.from(document.getElementsByTagName('button')).pop().click();
 }
 
 var reload = function() {
 	if (document.body.innerHTML.indexOf('Connecting seems to take longer than usual') != -1){
-		Array.from(document.getElementsByTagName('button')).pop().click();
+		refresh();
 	} else if(document.getElementsByClassName('my-identity').length == 0){
 		setTimeout(reload, timeout);
 	}
